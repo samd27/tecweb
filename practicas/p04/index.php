@@ -36,5 +36,37 @@
     <p>$a = “ManejadorSQL”;</p>
     <p>$b = 'MySQL’;</p>
     <p>$c = &$a;</p>
+    <?php
+        echo '<h4>a. Ahora muestra el contenido de cada variable</h4>';
+
+        $a = "ManejadorSQL";
+        $b = 'MySQL';
+        $c = &$a;
+
+        echo '<p>$a = '.$a.'</p>';
+        echo '<p>$b = '.$b.'</p>';
+        echo '<p>$c = '.$c.'</p>';
+
+        $a = "PHP server";
+        $b = &$a;
+
+        Echo '<h4> b. Agrega al código actual las siguientes asignaciones:</h4>';
+        echo '<p>$a = “PHP server”; <br>
+        $b = &$a; </p>';
+
+
+        echo '<h4> c. Ahora muestra el contenido de cada variable</h4>';    
+        echo '<p>$a = '.$a.'</p>';
+        echo '<p>$b = '.$b.'</p>';
+        echo '<p>$c = '.$c.'</p>';
+        
+    
+        echo '<h4>d. Describe en y muestra en la página obtenida qué ocurrió en el segundo bloque de
+        asignaciones</h4>';
+        
+        echo '<p> En la segunda asignacion de variables se le dio el valor "PHP sever" a la variable "a" <br>
+        y "b" comenzo a hacer referencia a "a". A su vez, "c" ya hacia referencia a "a", por lo que, las 3 variables <br>
+        mostraron el mismo texto. </p>';
+    ?>
 </body>
 </html>
