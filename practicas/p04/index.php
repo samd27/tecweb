@@ -63,10 +63,57 @@
     
         echo '<h4>d. Describe en y muestra en la página obtenida qué ocurrió en el segundo bloque de
         asignaciones</h4>';
-        
+
         echo '<p> En la segunda asignacion de variables se le dio el valor "PHP sever" a la variable "a" <br>
         y "b" comenzo a hacer referencia a "a". A su vez, "c" ya hacia referencia a "a", por lo que, las 3 variables <br>
         mostraron el mismo texto. </p>';
+        unset($a, $b, $c);
     ?>
+
+    <h2>Ejercicio 3</h2>
+    <p>3. Muestra el contenido de cada variable inmediatamente después de cada asignación, <br>
+    verificar la evolución del tipo de estas variables (imprime todos los componentes de los
+    arreglo):</p>
+
+    <?php
+        error_reporting(0);
+
+        $a = "PHP5 ";
+        echo '<p>$a = '.$a.'</p>';
+
+        $z[] = &$a;
+        echo '<p>$z[0] = '.$z[0].'</p>';
+        
+        $b = "5a version de PHP";
+        echo '<p>$b = '.$b.'</p>';
+
+        $c = $b*10;
+        echo '<p>$c = '.$c.'</p>';
+        
+        $a .= $b;
+        echo '<p>$a = '.$a.'</p>';
+        
+        $b *= $c;
+        echo '<p>$b = '.$b.'</p>';
+        
+        $z[0] = "MySQL";
+        echo json_encode($z);
+    ?>
+
+    <h2>Ejercicio 4</h2>
+    <p>4. Lee y muestra los valores de las variables del ejercicio anterior, pero ahora con la ayuda de <br>
+    la matriz $GLOBALS o del modificador global de PHP.</p>
+
+    <?php
+          global $a, $b, $c, $z;
+
+          echo "<p>\$a = $a</p>";
+          echo "<p>\$b = $b</p>";
+          echo "<p>\$c = $c</p>";
+          echo "<p>\$z = " . json_encode($z) . "</p>";
+
+          unset($a, $b, $c, $z);
+    ?>
+
 </body>
 </html>
