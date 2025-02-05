@@ -115,5 +115,55 @@
           unset($a, $b, $c, $z);
     ?>
 
+    <h2>Ejercicio 5</h2>
+    <p>5. Dar el valor de las variables $a, $b, $c al final del siguiente script: </p>
+    <?php
+        $a = "7 personas";
+        $b = (integer) $a;
+        $a = "9E3";
+        $c = (double) $a;
+
+
+        echo '<li>$a termina con el valor 9E3 que es 9 x 10^3 o 9000.</li>';
+        echo '<li>$b termina con el valor 7 porque se convirtió a entero y tomara 
+            el valor entero que tenia $a.</li>';
+        echo '<li>$c termina con el valor 9000.0 porque se convirtió a double 
+            y tomara el valor de $a </li>';
+
+        unset($a, $b, $c);
+    ?>
+
+    <h2>Ejercicio 6</h2>
+    <p>Dar y comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f y muéstralas
+    usando la función var_dump(<datos>).</p>
+
+    <?php
+        $a = "0";
+        $b = "TRUE";
+        $c = "FALSE";
+        $d = ($a OR $b);          
+        $e = ($a AND $c);     
+        $f = ($a XOR $b);         
+        var_dump($a);
+        echo "<br>";
+        var_dump($b);
+        echo "<br>";
+        var_dump($c);
+        echo "<br>";
+        var_dump($d);
+        echo "<br>";
+        var_dump($e);
+        echo "<br>";
+        var_dump($f);
+
+        echo '<p>Variables $e y $f con echo.</p>';
+        echo var_export($e);
+        echo "<br>";
+        echo var_export($f);
+
+
+
+  
+    ?>
 </body>
 </html>
