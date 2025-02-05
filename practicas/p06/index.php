@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica 4</title>
+    <title>Práctica 6</title>
 </head>
 <body>
     <h2>Ejercicio 1</h2>
@@ -19,8 +19,9 @@
         }
     ?>
 
+    <!--
     <h2>Ejemplo de POST</h2>
-    <form action="http://localhost/tecweb/practicas/p04/index.php" method="post">
+    <form action="http://localhost/tecweb/practicas/p06/index.php" method="post">
         Name: <input type="text" name="name"><br>
         E-mail: <input type="text" name="email"><br>
         <input type="submit">
@@ -33,6 +34,15 @@
             echo '<br>';
             echo $_POST["email"];
         }
+    ?>
+    -->
+
+    <h2>Ejercicio 2</h2>
+    <p>Crea un programa para la generación repetitiva de 3 números aleatorios hasta obtener una <br> secuencia compuesta por: impar, par, impar.</p>
+    <?php
+        require_once __DIR__ .'/src/funciones.php';
+
+        impar_par_impar();
     ?>
 </body>
 </html>

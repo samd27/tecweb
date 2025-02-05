@@ -7,5 +7,27 @@ function es_multiplo7y5($num){
     }
 }
 
+function impar_par_impar() {
+    $numeros = array();
+    $cont = 0;
+
+    do {
+        $cont++;
+        $var1 = rand(100, 999);
+        $var2 = rand(100, 999);
+        $var3 = rand(100, 999);
+          
+        $numeros[] = [$var1, $var2, $var3];
+
+    } while (!($var1 % 2 != 0 && $var2 % 2 == 0 && $var3 % 2 != 0)); 
+
+    foreach ($numeros as $fila) {
+        echo implode(', ', $fila) . "<br>";
+    }
+    echo '<h3>' . ($cont * 3) . ' números obtenidos en ' . $cont . ' iteraciones</h3>';
+}
+
+
+
 
 ?>
