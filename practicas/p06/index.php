@@ -44,5 +44,19 @@
 
         impar_par_impar();
     ?>
+
+    <h2>Ejercicio 3</h2>
+    <p>Utiliza un ciclo while para encontrar el primer número entero obtenido aleatoriamente,
+    pero que además <br> sea múltiplo de un número dado. El número dado se debe obtener vía GET.</p>
+
+    <?php
+        require_once __DIR__ .'/src/funciones.php';
+        multiplo($_GET['numero']);
+
+        echo '<p><strong>Crear una variante de este script utilizando el ciclo do-while.</strong></p>';
+        multiploVariacion($_GET['numero']);
+    ?>
+
+
 </body>
 </html>

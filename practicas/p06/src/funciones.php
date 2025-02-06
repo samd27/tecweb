@@ -28,6 +28,31 @@ function impar_par_impar() {
 }
 
 
+function multiplo($num) {
+    $var = rand(1, 1000);
+    $cont = 1; // Contador de intentos
+
+    // Mientras el número generado NO sea múltiplo de $num, seguimos generando
+    while ($var % $num != 0) {
+        $var = rand(1, 1000);
+        $cont++;
+    }
+
+    echo "<h4>El primer número entero obtenido aleatoriamente que ES múltiplo de $num es: $var</h4>";
+    echo "<p>Se compararon $cont numeros.</p>";
+}
+
+function multiploVariacion($num){
+    $cont = 0;
+    do {
+        $var = rand(1, 1000);
+        $cont++;
+    } while ($var % $num != 0); 
+        
+    echo "<h4>El primer número entero obtenido aleatoriamente que ES múltiplo de $num es: $var</h4>";
+    echo "<p>Se compararon $cont numeros.</p>";       
+}
+
 
 
 ?>
