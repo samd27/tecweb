@@ -57,6 +57,22 @@
         multiploVariacion($_GET['numero']);
     ?>
 
+    <h2>Ejercicio 4</h2>
+    <p>Crear un arreglo cuyos índices van de 97 a 122 y cuyos valores son las letras de la ‘a’
+    a la ‘z’. <br> Usa la función chr(n) que devuelve el caracter cuyo código ASCII es n para poner
+    el valor en cada índice.</p>
+    <h4>Lee el arreglo y crea una tabla en XHTML con echo y un ciclo foreach</h4>
+    
+    <table border="3">
+        <tr>
+            <th>Índice</th>
+            <th>Valor</th>
+        </tr>
+        <?php
+            require_once __DIR__ . '/src/funciones.php';
+            ascii();
+        ?>
+    </table>
 
 </body>
 </html>

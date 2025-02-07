@@ -39,7 +39,7 @@ function multiplo($num) {
     }
 
     echo "<h4>El primer número entero obtenido aleatoriamente que ES múltiplo de $num es: $var</h4>";
-    echo "<p>Se compararon $cont numeros.</p>";
+    echo "<p>Se compararon $cont números.</p>";
 }
 
 function multiploVariacion($num){
@@ -50,9 +50,19 @@ function multiploVariacion($num){
     } while ($var % $num != 0); 
         
     echo "<h4>El primer número entero obtenido aleatoriamente que ES múltiplo de $num es: $var</h4>";
-    echo "<p>Se compararon $cont numeros.</p>";       
+    echo "<p>Se compararon $cont números.</p>";       
 }
 
+
+function ascii() {
+    $letras = array();
+    for ($i = 97; $i <= 122; $i++) {
+        $letras[$i] = chr($i);
+    }
+    foreach ($letras as $key => $value) {
+        echo "<tr><td>$key</td><td>$value</td></tr>";
+    }
+}
 
 
 ?>
