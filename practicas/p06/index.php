@@ -19,8 +19,8 @@
         }
     ?>
 
-    <!--
-    <h2>Ejemplo de POST</h2>
+  
+    <!-- <h2>Ejemplo de POST</h2>
     <form action="http://localhost/tecweb/practicas/p06/index.php" method="post">
         Name: <input type="text" name="name"><br>
         E-mail: <input type="text" name="email"><br>
@@ -34,8 +34,9 @@
             echo '<br>';
             echo $_POST["email"];
         }
-    ?>
+    ?> 
     -->
+
 
     <h2>Ejercicio 2</h2>
     <p>Crea un programa para la generación repetitiva de 3 números aleatorios hasta obtener una <br> secuencia compuesta por: impar, par, impar.</p>
@@ -51,10 +52,14 @@
 
     <?php
         require_once __DIR__ .'/src/funciones.php';
-        multiplo($_GET['numero']);
+        if (isset($_GET['numero']))
+        {
+            multiplo($_GET['numero']);
 
-        echo '<p><strong>Crear una variante de este script utilizando el ciclo do-while.</strong></p>';
-        multiploVariacion($_GET['numero']);
+            echo '<p><strong>Crear una variante de este script utilizando el ciclo do-while.</strong></p>';
+            multiploVariacion($_GET['numero']);
+        }
+        
     ?>
 
     <h2>Ejercicio 4</h2>
@@ -73,6 +78,34 @@
             ascii();
         ?>
     </table>
+
+    <h2>Ejercicio 5</h2>
+    <p>Usar las variables $edad y $sexo en una instrucción if para identificar una persona de
+    sexo “femenino”, <br >cuya edad oscile entre los 18 y 35 años y mostrar un mensaje de
+    bienvenida apropiado.</p>
+    <h4>Los valores para $edad y $sexo se deben obtener por medio de un formulario en
+    HTML. <br> Utilizar el la Variable Superglobal $_POST.</h4>
+
+
+    <form action="http://localhost/tecweb/practicas/p06/index.php" method="post">
+    Sexo: 
+    <select name="sexo">
+        <option value="masculino">Masculino</option>
+        <option value="femenino">Femenino</option>
+    </select>
+    <br>
+    Edad: <input type="number" name="edad" min="0"><br>
+    <input type="submit" value="Enviar">
+    </form>
+
+
+    <?php
+        require_once __DIR__ . '/src/funciones.php';
+        if(isset($_POST["sexo"]) && isset($_POST["edad"]))
+        {
+            rango_edad($_POST["edad"], $_POST["sexo"]);
+        }
+    ?>
 
 </body>
 </html>

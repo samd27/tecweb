@@ -64,5 +64,14 @@ function ascii() {
     }
 }
 
+function rango_edad($num, $sexo) {
+    if ($num >= 18 && $num <=35 && $sexo == 'femenino')
+    {
+        echo '<h3>R= Bienvenida, usted está en el rango de edad permitido.</h3>';
+    }
+    else{
+        echo '<h3>R= Lo sentimos, usted no está en el rango de edad permitido.</h3>';
+    }
+}
 
 ?>
