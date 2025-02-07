@@ -1,4 +1,8 @@
 <?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
 function es_multiplo7y5($num){
     if ($num % 5 == 0 && $num % 7 == 0) {
         echo '<h3>R= El número ' . $num . ' SÍ es múltiplo de 5 y 7.</h3>';
@@ -73,5 +77,133 @@ function rango_edad($num, $sexo) {
         echo '<h3>R= Lo sentimos, usted no está en el rango de edad permitido.</h3>';
     }
 }
+
+
+function parque_small(){
+    $vehiculos2 = array(
+        'ABC1234' => [
+            'Auto' => [
+                'marca'=> 'HONDA', 'modelo' => '2020', 'tipo' => 'camioneta'
+            ],
+            'Propietario' => [
+                'nombre' => 'Juan Pérez', 'ciudad' => 'Puebla', 'direccion' => 'Av. Juárez 123'
+            ]
+        ],
+        'DEF5678' => [
+            'Auto' => [
+                'marca'=> 'TOYOTA', 'modelo' => '2019', 'tipo' => 'sedán'
+            ],
+            'Propietario' => [
+                'nombre' => 'María López', 'ciudad' => 'CDMX', 'direccion' => 'Calle Reforma 456'
+            ]
+        ]
+    );
+    print_r($vehiculos2);
+}
+function parque($mat)
+{
+    $vehiculos = array(
+        'ABC1234' => [
+            'Auto' => [
+                'marca'=> 'HONDA', 'modelo' => '2020', 'tipo' => 'camioneta'
+            ],
+            'Propietario' => [
+                'nombre' => 'Juan Pérez', 'ciudad' => 'Puebla', 'direccion' => 'Av. Juárez 123'
+            ]
+        ],
+        'DEF5678' => [
+            'Auto' => [
+                'marca'=> 'TOYOTA', 'modelo' => '2019', 'tipo' => 'sedán'
+            ],
+            'Propietario' => [
+                'nombre' => 'María López', 'ciudad' => 'CDMX', 'direccion' => 'Calle Reforma 456'
+            ]
+        ],
+        'GHI9012' => [
+            'Auto' => [
+                'marca'=> 'FORD', 'modelo' => '2018', 'tipo' => 'hatchback'
+            ],
+            'Propietario' => [
+                'nombre' => 'Carlos García', 'ciudad' => 'Guadalajara', 'direccion' => 'Blvd. Hidalgo 789'
+            ]
+        ],
+        'JKL3456' => [
+            'Auto' => [
+                'marca'=> 'NISSAN', 'modelo' => '2021', 'tipo' => 'sedán'
+            ],
+            'Propietario' => [
+                'nombre' => 'Ana Torres', 'ciudad' => 'Monterrey', 'direccion' => 'Carrera 10 #20-30'
+            ]
+        ],
+        'MNO7890' => [
+            'Auto' => [
+                'marca'=> 'BMW', 'modelo' => '2017', 'tipo' => 'camioneta'
+            ],
+            'Propietario' => [
+                'nombre' => 'Pedro Ramírez', 'ciudad' => 'Cancún', 'direccion' => 'Plaza Mayor 321'
+            ]
+        ],
+        'PQR1122' => [
+            'Auto' => [
+                'marca'=> 'CHEVROLET', 'modelo' => '2016', 'tipo' => 'sedán'
+            ],
+            'Propietario' => [
+                'nombre' => 'Sofía Méndez', 'ciudad' => 'Tijuana', 'direccion' => 'Av. Insurgentes 987'
+            ]
+        ],
+        'STU3344' => [
+            'Auto' => [
+                'marca'=> 'MAZDA', 'modelo' => '2022', 'tipo' => 'camioneta'
+            ],
+            'Propietario' => [
+                'nombre' => 'Diego Fernández', 'ciudad' => 'Mérida', 'direccion' => 'Calle 50 #123'
+            ]
+        ],
+        'VWX5566' => [
+            'Auto' => [
+                'marca'=> 'VOLKSWAGEN', 'modelo' => '2015', 'tipo' => 'hatchback'
+            ],
+            'Propietario' => [
+                'nombre' => 'Elena Rojas', 'ciudad' => 'León', 'direccion' => 'Blvd. Campestre 456'
+            ]
+        ],
+        'YZA7788' => [
+            'Auto' => [
+                'marca'=> 'KIA', 'modelo' => '2023', 'tipo' => 'sedán'
+            ],
+            'Propietario' => [
+                'nombre' => 'Miguel Herrera', 'ciudad' => 'Querétaro', 'direccion' => 'Av. Zaragoza 789'
+            ]
+        ],
+        'BCD9900' => [
+            'Auto' => [
+                'marca'=> 'HYUNDAI', 'modelo' => '2014', 'tipo' => 'camioneta'
+            ],
+            'Propietario' => [
+                'nombre' => 'Laura Castillo', 'ciudad' => 'Saltillo', 'direccion' => 'Calle Victoria 101'
+            ]
+        ]
+    );
+
+    if ($mat != NULL)
+    {
+        if(array_key_exists($mat, $vehiculos))
+        {
+            echo '<h3>Auto con matrícula ' . $mat . '</h3>';
+            print_r($vehiculos[$mat]);
+        }
+        else
+        {
+            echo '<h3>No se encontró un auto con matrícula ' . $mat . '</h3>';
+        }
+    }
+    else
+    {
+        echo '<h3>Lista de autos registrados</h3>';
+        print_r($vehiculos);
+    }
+
+}
+
 
 ?>

@@ -107,5 +107,65 @@
         }
     ?>
 
+    <h2>Ejercicio 6</h2>
+    <p>Crea en código duro un arreglo asociativo que sirva para registrar el parque vehicular de
+        una ciudad.</p>
+    <ul>
+        <li>Matricula
+            <ul>
+                <li>Auto
+                    <ul>
+                        <li>Marca</li>
+                        <li>Modelo (año)</li>
+                        <li>Tipo (sedan|hachback|camioneta)</li>
+                    </ul>
+                </li>
+                <li>Propietario
+                    <ul>
+                        <li>Nombre</li>
+                        <li>Ciudad</li>
+                        <li>Dirección</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <p>Ejemplo con dos autos.</p>
+    <?php
+        require_once __DIR__ . '/src/funciones.php';
+        parque_small();
+    ?>
+
+    <h4>Finalmente crea un formulario simple donde puedas consultar la información:</h4>
+    <li>Por matricula de auto.</li>    
+    <li>De todos los autos registrados.</li>
+    <br>
+
+    <form action="http://localhost/tecweb/practicas/p06/index.php" method="post">
+        Ingresa la matricula del auto: <input type="text" name="matricula"><br>
+        <input type="submit">
+        <br>
+        <br>
+        <button type="submit" name="todos">Mostrar Todos los Autos</button>
+    </form>
+        
+    <?php
+        require_once __DIR__ . '/src/funciones.php';
+
+        if (isset($_POST["todos"])) {
+            parque(null);
+            exit();
+        }
+
+
+        if (!empty($_POST["matricula"])) {
+            parque($_POST["matricula"]);
+        } 
+        elseif (isset($_POST["matricula"]))
+        {
+            echo "<h3>Por favor, ingresa una matrícula válida.</h3>";
+        } 
+    ?>
 </body>
 </html>
