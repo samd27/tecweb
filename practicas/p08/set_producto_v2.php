@@ -25,6 +25,7 @@ if ($repNom->num_rows > 0)
 }
 
 /** Crear una tabla que no devuelve un conjunto de resultados */
+/*
 $sql = "INSERT INTO productos VALUES (null, '{$nombre}', '{$marca}', '{$modelo}', {$precio}, '{$detalles}', {$unidades}, '{$imagen}', 0)";
 if ( $link->query($sql) ) 
 {
@@ -41,6 +42,24 @@ else
 {
     echo 'El Producto no pudo ser insertado =(';
 }
+*/
+
+$sql = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen) 
+        VALUES ('{$nombre}', '{$marca}', '{$modelo}', {$precio}, '{$detalles}', {$unidades}, '{$imagen}')";
+
+if ($link->query($sql)) {
+    echo 'El Producto ha sido registrado exitosamente:<br/>';
+    echo 'Nombre: ' . $nombre . '<br/>';
+    echo 'Marca: ' . $marca . '<br/>';
+    echo 'Modelo: ' . $modelo . '<br/>';
+    echo 'Precio: ' . $precio . '<br/>';
+    echo 'Detalles: ' . $detalles . '<br/>';
+    echo 'Unidades: ' . $unidades . '<br/>';
+    echo 'Imagen: ' . $imagen . '<br/>';
+} else {
+    echo 'El Producto no pudo ser insertado =(';
+}
+
 
 $link->close();
 ?>
