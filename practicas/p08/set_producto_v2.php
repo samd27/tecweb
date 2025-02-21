@@ -16,22 +16,30 @@ if ($link->connect_errno)
     die('Falló la conexión: '.$link->connect_error.'<br/>');
     /** NOTA: con @ se suprime el Warning para gestionar el error por medio de código */
 }
-
-$result = $link->query("SELECT * FROM productos WHERE nombre = '{$nombre}'");
-if ($result->num_rows > 0) 
+$repNom = $link->query("SELECT * FROM productos WHERE nombre = '{$nombre}' AND marca = '{$marca}' AND modelo = '{$modelo}'");
+if ($repNom->num_rows > 0) 
 {
-    die('El producto ya existe');
+    echo 'El Producto ya se encuentra registrado';
+    die();
+    
 }
 
 /** Crear una tabla que no devuelve un conjunto de resultados */
 $sql = "INSERT INTO productos VALUES (null, '{$nombre}', '{$marca}', '{$modelo}', {$precio}, '{$detalles}', {$unidades}, '{$imagen}')";
 if ( $link->query($sql) ) 
 {
-    echo 'Producto insertado con ID: '.$link->insert_id;
+    echo 'El Producto ha sido registrado exitosamente:<br/>';
+    echo 'Nombre: ' . $nombre . '<br/>';
+    echo 'Marca: ' . $marca . '<br/>';
+    echo 'Modelo: ' . $modelo . '<br/>';
+    echo 'Precio: ' . $precio . '<br/>';
+    echo 'Detalles: ' . $detalles . '<br/>';
+    echo 'Unidades: ' . $unidades . '<br/>';
+    echo 'Imagen: ' . $imagen . '<br/>';
 }
 else
 {
-	echo 'El Producto no pudo ser insertado =(';
+    echo 'El Producto no pudo ser insertado =(';
 }
 
 $link->close();
