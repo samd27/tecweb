@@ -7,11 +7,6 @@ $detalles = $_POST['detalles'];
 $unidades = $_POST['unidades'];
 $imagen   = $_POST['imagen'];
 
-if ($imagen == null)
-{
-    $imagen = 'img/imagen.png';
-}
-
 /** SE CREA EL OBJETO DE CONEXION */
 @$link = new mysqli('localhost', 'root', 'samd2704', 'marketzone');	
 
