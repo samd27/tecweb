@@ -17,7 +17,9 @@
     <form id="formularioPhones" action="http://localhost/tecweb/practicas/p08/set_producto_v2.php" method="post">
 
     <fieldset>
-        <li><label for="form-nombre">Nombre:</label> <input type="text" name="nombre" id="form-nombre" ></li>
+      <legend>Actualiza los datos de este Smarthphone:</legend>
+
+        <li><label for="form-nombre">Nombre:</label> <input type="text" name="nombre" id="form-nombre" value="<?= !empty($_POST['nombre'])?$_POST['nombre']:$_GET['nombre'] ?>"></li>
         <script>
           document.getElementById('formularioPhones').addEventListener('submit', function(event) {
             var nombre = document.getElementById('form-nombre').value;
@@ -48,7 +50,7 @@
           });
         </script>
 
-        <li><label for="form-modelo">Modelo:</label> <input type="text" name="modelo" id="form-modelo"></li>
+        <li><label for="form-modelo">Modelo:</label> <input type="text" name="modelo" id="form-modelo" value="<?= !empty($_POST['modelo'])?$_POST['modelo']:$_GET['modelo'] ?>"></li>
         <script>
           document.getElementById('formularioPhones').addEventListener('submit', function(event) {
             var modelo = document.getElementById('form-modelo').value;
@@ -59,7 +61,7 @@
           });
         </script>
 
-        <li><label for="form-precio">Precio:</label> <input type="number" name="precio" id="form-precio"></li>
+        <li><label for="form-precio">Precio:</label> <input type="number" name="precio" id="form-precio" value="<?= !empty($_POST['precio'])?$_POST['precio']:$_GET['precio'] ?>"></li>
         <script>
           document.getElementById('formularioPhones').addEventListener('submit', function(event) {
             var precio = document.getElementById('form-precio').value;
@@ -70,7 +72,10 @@
           });
         </script>
 
-        <li><label for="form-detalles">Detalles(opcional):</label><br><textarea name="detalles" rows="4" cols="60" id="form-detalles" placeholder="250 caracteres maximo"></textarea></li>
+        <li>
+          <label for="form-detalles">Detalles (opcional):</label><br>
+          <textarea name="detalles" rows="4" cols="60" id="form-detalles"> <?= !empty($_POST['detalles'])?$_POST['detalles']:$_GET['detalles'] ?>"</textarea>
+        </li>
         <script>
           document.getElementById('formularioPhones').addEventListener('submit', function(event) {
             var detalles = document.getElementById('form-detalles').value;
@@ -81,7 +86,7 @@
           });
         </script>
 
-        <li><label for="form-unidades">Unidades:</label> <input type="number" name="unidades" id="form-unidades"></li>
+        <li><label for="form-unidades">Unidades:</label> <input type="number" name="unidades" id="form-unidades" value="<?= !empty($_POST['unidades'])?$_POST['unidades']:$_GET['unidades'] ?>"></li>
         <script>
           document.getElementById('formularioPhones').addEventListener('submit', function(event) {
             var unidades = document.getElementById('form-unidades').value;
@@ -102,7 +107,10 @@
           });
         </script>
         
-        <li><label for="form-imagen">Imagen:</label> <input type="text" name="imagen" id="form-imagen"></li>
+        <li>
+          <label for="form-imagen">Imagen:</label>
+          <input type="text" name="imagen" id="form-imagen" value="<?= !empty($_POST['imagen'])?$_POST['imagen']:$_GET['imagen'] ?>">
+        </li>
         <script>
           document.getElementById('formularioPhones').addEventListener('submit', function(event) {
             var imagenInput = document.getElementById('form-imagen');

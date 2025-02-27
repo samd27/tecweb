@@ -5,6 +5,17 @@
     //header("Content-Type: application/json; charset=utf-8"); 
     $data = array();
 
+	if(isset($_GET['tope']))
+    {
+		$tope = $_GET['tope'];
+    }
+    else
+    {
+        die('Parámetro "tope" no detectado...');
+    }
+
+	if (!empty($tope))
+	{
 		/** SE CREA EL OBJETO DE CONEXION */
 		@$link = new mysqli('localhost', 'root', 'samd2704', 'marketzone');
         /** NOTA: con @ se suprime el Warning para gestionar el error por medio de código */
@@ -17,7 +28,7 @@
 		}
 
 		/** Crear una tabla que no devuelve un conjunto de resultados */
-		if ( $result = $link->query("SELECT * FROM productos WHERE eliminado != 0") ) 
+		if ( $result = $link->query("SELECT * FROM productos WHERE unidades <= $tope") ) 
 		{
             /** Se extraen las tuplas obtenidas de la consulta */
 			$row = $result->fetch_all(MYSQLI_ASSOC);
@@ -37,6 +48,7 @@
 
         /** Se devuelven los datos en formato JSON */
         //echo json_encode($data, JSON_PRETTY_PRINT);
+	}
 	?>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -72,7 +84,7 @@
 						<td><?= $value['precio'] ?></td>
 						<td><?= $value['unidades'] ?></td>
 						<td><?= $value['detalles'] ?></td>
-						<td><img src="<?= $value['imagen'] ?>" style="height: 150px;"></td>
+						<td><img src=<?= $value['imagen'] ?> ></td>
 					</tr>
 					<?php endforeach; ?>
 				</tbody>
