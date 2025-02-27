@@ -6,9 +6,10 @@
     $detalles = $_POST['detalles'];
     $unidades = $_POST['unidades'];
     $imagen   = $_POST['imagen'];
+    $id       = $_POST['id'];
     
     /* MySQL Conexion*/
-    $link = mysqli_connect("localhost", "root", "root", "demoDB");
+    @$link = new mysqli('localhost', 'root', 'samd2704', 'marketzone');	
     // Chequea coneccion
     if($link === false){
     die("ERROR: No pudo conectarse con la DB. " . mysqli_connect_error());
@@ -26,6 +27,8 @@
     ;
     if(mysqli_query($link, $sql)){
     echo "Registro actualizado.";
+    echo "<br><a href='get_productos_xhtml_v2.php'>Ver productos en XHTML</a>";
+    echo "<br><a href='get_productos_vigentes_v2.php'>Ver productos vigentes</a>";
     } else {
     echo "ERROR: No se ejecuto $sql. " . mysqli_error($link);
     }

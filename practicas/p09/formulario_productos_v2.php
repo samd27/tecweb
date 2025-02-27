@@ -14,10 +14,12 @@
   <body>
     <h1>Registro de Smarthphones</h1>
 
-    <form id="formularioPhones" action="http://localhost/tecweb/practicas/p08/set_producto_v2.php" method="post">
+    <form id="formularioPhones" action="http://localhost/tecweb/practicas/p09/update_producto.php" method="post">
 
     <fieldset>
       <legend>Actualiza los datos de este Smarthphone:</legend>
+
+        <li><label for="form-id">ID:</label> <input type="text" name="id" id="form-id" value="<?= !empty($_POST['id'])?$_POST['id']:$_GET['id'] ?>" readonly></li>
 
         <li><label for="form-nombre">Nombre:</label> <input type="text" name="nombre" id="form-nombre" value="<?= !empty($_POST['nombre'])?$_POST['nombre']:$_GET['nombre'] ?>"></li>
         <script>
@@ -29,15 +31,14 @@
             }
           });
         </script>
-        
         <li>
           <label for="form-marca">Marca: </label>
           <select name="marca" id="form-marca">
             <option value="">Seleccione una marca</option>
-            <option value="Samsung">Samsung</option>
-            <option value="Apple">Apple</option>
-            <option value="Pixel">Pixel</option>
-            <option value="Xiaomi">Xiaomi</option>
+            <option value="Samsung" <?= (!empty($_POST['marca']) && $_POST['marca'] == 'Samsung') || (!empty($_GET['marca']) && $_GET['marca'] == 'Samsung') ? 'selected' : '' ?>>Samsung</option>
+            <option value="Apple" <?= (!empty($_POST['marca']) && $_POST['marca'] == 'Apple') || (!empty($_GET['marca']) && $_GET['marca'] == 'Apple') ? 'selected' : '' ?>>Apple</option>
+            <option value="Pixel" <?= (!empty($_POST['marca']) && $_POST['marca'] == 'Pixel') || (!empty($_GET['marca']) && $_GET['marca'] == 'Pixel') ? 'selected' : '' ?>>Pixel</option>
+            <option value="Xiaomi" <?= (!empty($_POST['marca']) && $_POST['marca'] == 'Xiaomi') || (!empty($_GET['marca']) && $_GET['marca'] == 'Xiaomi') ? 'selected' : '' ?>>Xiaomi</option>
           </select>
         </li>
         <script>
@@ -50,7 +51,7 @@
           });
         </script>
 
-        <li><label for="form-modelo">Modelo:</label> <input type="text" name="modelo" id="form-modelo" value="<?= !empty($_POST['modelo'])?$_POST['modelo']:$_GET['modelo'] ?>"></li>
+        <li><label for="form-modelo">Modelo:</label> <input type="text" name="modelo" id="form-modelo"></li>
         <script>
           document.getElementById('formularioPhones').addEventListener('submit', function(event) {
             var modelo = document.getElementById('form-modelo').value;
