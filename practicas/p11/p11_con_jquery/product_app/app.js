@@ -13,11 +13,16 @@ function init() {
      * Convierte el JSON a string para poder mostrarlo
      * ver: https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/JSON
      */
-    var JsonString = JSON.stringify(baseJSON,null,2);
+    var JsonString = JSON.stringify(baseJSON, null, 2);
     document.getElementById("description").value = JsonString;
 
     // SE LISTAN TODOS LOS PRODUCTOS
     listarProductos();
+
+    // Asignar el evento keyup al campo de búsqueda
+    $('#search').keyup(function() {
+        buscarProducto();
+    });
 }
 
 // FUNCIÓN CALLBACK AL CARGAR LA PÁGINA O AL AGREGAR UN PRODUCTO
@@ -63,9 +68,7 @@ function listarProductos() {
 }
 
 // FUNCIÓN CALLBACK DE BOTÓN "Buscar"
-function buscarProducto(e) {
-    e.preventDefault();
-
+function buscarProducto() {
     // SE OBTIENE EL VALOR DEL CAMPO DE BÚSQUEDA
     var search = $('#search').val();
 
@@ -189,7 +192,6 @@ function agregarProducto(e) {
         }
     });
 }
-
 
 // FUNCIÓN CALLBACK DE BOTÓN "Eliminar"
 function eliminarProducto() {
