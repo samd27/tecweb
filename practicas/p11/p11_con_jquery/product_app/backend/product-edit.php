@@ -1,27 +1,39 @@
 <?php
 include ('database.php');
 
-var_dump($_POST);
+$rawData = file_get_contents("php://input");
+$producto = json_decode($rawData, true);
 
-if (isset($_POST['id'])) {
-    $id = $_POST['id'];
-    $nombre = $_POST['nombre'];
-    $marca = $_POST['marca'];
-    $modelo = $_POST['modelo'];
-    $precio = $_POST['precio'];
-    $detalles = $_POST['detalles'];
-    $unidades = $_POST['unidades'];
-    $imagen = $_POST['imagen'];
+$response = array(
+    'status'  => 'error',
+    'message' => 'ID no proporcionado'
+);
+if (isset($producto['id'])) {
+    $id = $producto['id'];
+    $nombre = $producto['nombre'];
+    $marca = $producto['marca'];
+    $modelo = $producto['modelo'];
+    $precio = $producto['precio'];
+    $detalles = $producto['detalles'];
+    $unidades = $producto['unidades'];
+    $imagen = $producto['imagen'];
 
     $query = "UPDATE productos SET nombre = '$nombre', marca = '$marca', modelo = '$modelo', precio = $precio, detalles = '$detalles', unidades = $unidades, imagen = '$imagen' WHERE id = $id";
     $result = mysqli_query($conexion, $query);
 
     if ($result) {
-        echo json_encode(['status' => 'success', 'message' => 'Producto actualizado correctamente']);
+        if (mysqli_affected_rows($conexion) > 0) {
+            $response['status'] = 'success';
+            $response['message'] = 'Producto actualizado correctamente';
+        } else {
+            $response['message'] = 'No se realizaron cambios en el producto';
+        }
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el producto']);
+        $response['message'] = 'Error al actualizar el producto: ' . mysqli_error($conexion);
     }
-} else {
-    echo json_encode(['status' => 'error', 'message' => 'ID no proporcionado']);
 }
+
+// Cierra la conexion
+$conexion->close();
+echo json_encode($response, JSON_PRETTY_PRINT);
 ?>

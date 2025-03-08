@@ -8,6 +8,8 @@ var baseJSON = {
     "imagen": "img/default.png"
 };
 
+// Define edit in the global scope with default URL for adding a product
+var editUrl = './backend/product-add.php';
 
 function init() {
     /**
@@ -24,7 +26,7 @@ function init() {
     $('#search').keyup(function() {
         buscarProducto();
     });
-    let edit = false;
+
 }
 
 // FUNCIÓN CALLBACK AL CARGAR LA PÁGINA O AL AGREGAR UN PRODUCTO
@@ -180,24 +182,35 @@ function agregarProducto(e) {
 
     finalJSON['id'] = parseInt($('#id').val(), 10);  // Convertir el id a número
 
-
     if (!validarFormulario(finalJSON)) {
         return;
     }
-      console.log(finalJSON); 
+    console.log(finalJSON); 
 
     productoJsonString = JSON.stringify(finalJSON, null, 2);
-    let url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
-    console.log(url);
+    console.log(editUrl);
     $.ajax({
-        url: url,
+        url: editUrl,
         type: 'POST',
         contentType: 'application/json;charset=UTF-8',
         data: productoJsonString,
         dataType: 'json',
         success: function(respuesta) {
             console.log(respuesta);
-            listarProductos();
+            let template_bar = '';
+            template_bar += `
+            <li style="list-style: none;">status: ${respuesta.status}</li>
+            <li style="list-style: none;">message: ${respuesta.message}</li>
+        `;
+
+        // SE HACE VISIBLE LA BARRA DE ESTADO
+        $('#product-result').removeClass('d-none').addClass('card my-4 d-block');
+
+        // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
+        $('#container').html(template_bar);
+
+        // SE LISTAN TODOS LOS PRODUCTOS
+        listarProductos();
         },
         error: function(xhr, status, error) {
             console.error('Error en la solicitud AJAX:', error);
@@ -239,9 +252,6 @@ function eliminarProducto() {
     }
 }
 
-
-
-
 // Delegación de eventos para los botones de eliminar
 $(document).on('click', '.product-delete', eliminarProducto);
 
@@ -255,7 +265,6 @@ $(document).on('click', '.product-item', function() {
         $('#id').val(product.id); 
         $('#name').val(product.name);
 
-
         let formattedProduct = {
             "precio": parseFloat(product.precio),
             "unidades": parseInt(product.unidades),
@@ -267,7 +276,7 @@ $(document).on('click', '.product-item', function() {
         let formattedJson = JSON.stringify(formattedProduct, null, 2);
         $('#description').val(formattedJson);
         console.log(formattedJson);
-        edit = true;
+        editUrl = './backend/product-edit.php'; // Change URL to edit product
     });
 });
 
