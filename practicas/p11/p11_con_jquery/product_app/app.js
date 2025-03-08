@@ -8,6 +8,7 @@ var baseJSON = {
     "imagen": "img/default.png"
 };
 
+
 function init() {
     /**
      * Convierte el JSON a string para poder mostrarlo
@@ -23,6 +24,7 @@ function init() {
     $('#search').keyup(function() {
         buscarProducto();
     });
+    let edit = false;
 }
 
 // FUNCIÓN CALLBACK AL CARGAR LA PÁGINA O AL AGREGAR UN PRODUCTO
@@ -46,7 +48,9 @@ function listarProductos() {
                     template += `
                         <tr productId="${producto.id}">
                             <td>${producto.id}</td>
-                            <td>${producto.nombre}</td>
+                            <td>
+                                <a href="#" class="product-item">${producto.nombre}</a>
+                            </td>
                             <td><ul>${descripcion}</ul></td>
                             <td>
                                 <button class="product-delete btn btn-danger">
@@ -93,7 +97,9 @@ function buscarProducto() {
                     template += `
                         <tr productId="${producto.id}">
                             <td>${producto.id}</td>
-                            <td>${producto.nombre}</td>
+                            <td>
+                                <a href="#" class="product-item">${producto.nombre}</a>
+                            </td>
                             <td><ul>${descripcion}</ul></td>
                             <td>
                                 <button class="product-delete btn btn-danger">
@@ -169,16 +175,22 @@ function agregarProducto(e) {
 
     var productoJsonString = $('#description').val();
     var finalJSON = JSON.parse(productoJsonString);
+    finalJSON['id'] = $('#id').val(); 
     finalJSON['nombre'] = $('#name').val();
+
+    finalJSON['id'] = parseInt($('#id').val(), 10);  // Convertir el id a número
+
 
     if (!validarFormulario(finalJSON)) {
         return;
     }
+      console.log(finalJSON); 
 
     productoJsonString = JSON.stringify(finalJSON, null, 2);
-
+    let url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
+    console.log(url);
     $.ajax({
-        url: './backend/product-add.php',
+        url: url,
         type: 'POST',
         contentType: 'application/json;charset=UTF-8',
         data: productoJsonString,
@@ -227,10 +239,40 @@ function eliminarProducto() {
     }
 }
 
+
+
+
 // Delegación de eventos para los botones de eliminar
 $(document).on('click', '.product-delete', eliminarProducto);
 
+$(document).on('click', '.product-item', function() {
+    let element = $(this)[0].parentElement.parentElement;
+    let id = $(element).attr('productId');
+
+    // Obtener el producto del servidor
+    $.post('./backend/product-single.php', { id }, function(response) {
+        const product = JSON.parse(response);
+        $('#id').val(product.id); 
+        $('#name').val(product.name);
+
+
+        let formattedProduct = {
+            "precio": parseFloat(product.precio),
+            "unidades": parseInt(product.unidades),
+            "modelo": product.modelo,
+            "marca": product.marca,
+            "detalles": product.detalles,
+            "imagen": product.imagen
+        };
+        let formattedJson = JSON.stringify(formattedProduct, null, 2);
+        $('#description').val(formattedJson);
+        console.log(formattedJson);
+        edit = true;
+    });
+});
+
 // Inicialización al cargar la página
 $(document).ready(function() {
+    $('#product-form').submit(agregarProducto); 
     init();
 });
