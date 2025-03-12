@@ -1,39 +1,41 @@
 <?php
-include ('database.php');
+include_once __DIR__.'/database.php';
 
-$rawData = file_get_contents("php://input");
-$producto = json_decode($rawData, true);
+$nombre   = $_POST['nombre'];
+$marca    = $_POST['marca'];
+$modelo   = $_POST['modelo'];
+$precio   = $_POST['precio'];
+$detalles = $_POST['detalles'];
+$unidades = $_POST['unidades'];
+$imagen   = $_POST['imagen'];
+$id       = $_POST['id'];
 
-$response = array(
+// SE CREA EL ARREGLO QUE SE VA A DEVOLVER EN FORMA DE JSON
+$data = array(
     'status'  => 'error',
-    'message' => 'ID no proporcionado'
+    'message' => 'La consulta falló'
 );
-if (isset($producto['id'])) {
-    $id = $producto['id'];
-    $nombre = $producto['nombre'];
-    $marca = $producto['marca'];
-    $modelo = $producto['modelo'];
-    $precio = $producto['precio'];
-    $detalles = $producto['detalles'];
-    $unidades = $producto['unidades'];
-    $imagen = $producto['imagen'];
 
-    $query = "UPDATE productos SET nombre = '$nombre', marca = '$marca', modelo = '$modelo', precio = $precio, detalles = '$detalles', unidades = $unidades, imagen = '$imagen' WHERE id = $id";
-    $result = mysqli_query($conexion, $query);
+// SE VERIFICA HABER RECIBIDO EL ID
+if (isset($nombre)) {
+    $sql = "SELECT * FROM productos WHERE nombre = '$nombre' AND eliminado = 0";
+    $result = $conexion->query($sql);
 
-    if ($result) {
-        if (mysqli_affected_rows($conexion) > 0) {
-            $response['status'] = 'success';
-            $response['message'] = 'Producto actualizado correctamente';
+    if ($result->num_rows == 0) {
+        $sql = "UPDATE productos SET nombre='$nombre', marca='$marca', modelo='$modelo', precio='$precio', detalles='$detalles', unidades='$unidades', imagen='$imagen' WHERE id = $id";
+        if ($conexion->query($sql)) {
+            $data['status'] = "success";
+            $data['message'] = "Producto actualizado";
         } else {
-            $response['message'] = 'No se realizaron cambios en el producto';
+            $data['message'] = "ERROR: No se ejecuto $sql. " . mysqli_error($conexion);
         }
     } else {
-        $response['message'] = 'Error al actualizar el producto: ' . mysqli_error($conexion);
+        $data['message'] = "Ya existe un producto con ese nombre";
     }
+    $result->free();
+    $conexion->close();
 }
 
-// Cierra la conexion
-$conexion->close();
-echo json_encode($response, JSON_PRETTY_PRINT);
+// SE HACE LA CONVERSIÓN DE ARRAY A JSON
+echo json_encode($data, JSON_PRETTY_PRINT);
 ?>
