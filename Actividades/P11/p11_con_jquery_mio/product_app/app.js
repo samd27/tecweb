@@ -1,0 +1,262 @@
+var editUrl = './backend/product-add.php';
+$('#product-result').hide();
+
+function init() {
+ 
+    // SE LISTAN TODOS LOS PRODUCTOS
+    listarProductos();
+
+    // Asignar el evento keyup al campo de búsqueda
+    $('#search').keyup(function() {
+        buscarProducto();
+    });
+
+}
+
+// FUNCIÓN CALLBACK AL CARGAR LA PÁGINA O AL AGREGAR UN PRODUCTO
+function listarProductos() {
+    $.ajax({
+        url: './backend/product-list.php',
+        type: 'GET',
+        success: function(response) {
+            const productos = JSON.parse(response);
+            if(Object.keys(productos).length > 0) {
+                let template = '';
+                productos.forEach(producto => {
+                    let descripcion = '';
+                    descripcion += '<li>precio: '+producto.precio+'</li>';
+                    descripcion += '<li>unidades: '+producto.unidades+'</li>';
+                    descripcion += '<li>modelo: '+producto.modelo+'</li>';
+                    descripcion += '<li>marca: '+producto.marca+'</li>';
+                    descripcion += '<li>detalles: '+producto.detalles+'</li>';
+                
+                    template += `
+                        <tr productId="${producto.id}">
+                            <td>${producto.id}</td>
+                            <td><a href="#" class="product-item">${producto.nombre}</a></td>
+                            <td><ul>${descripcion}</ul></td>
+                            <td>
+                                <button class="product-delete btn btn-danger" onclick="eliminarProducto()">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                $('#products').html(template);
+            }
+        }
+    });
+}
+// FUNCIÓN CALLBACK DE BOTÓN "Buscar"
+function buscarProducto() {
+    // SE OBTIENE EL VALOR DEL CAMPO DE BÚSQUEDA
+    var search = $('#search').val();
+
+    $.ajax({
+        url: './backend/product-search.php',
+        type: 'GET',
+        data: { search: search },
+        dataType: 'json',
+        success: function(productos) {
+            if (Object.keys(productos).length > 0) {
+                let template = '';
+                let template_bar = '';
+
+                productos.forEach(producto => {
+                    let descripcion = '';
+                    descripcion += '<li>precio: ' + producto.precio + '</li>';
+                    descripcion += '<li>unidades: ' + producto.unidades + '</li>';
+                    descripcion += '<li>modelo: ' + producto.modelo + '</li>';
+                    descripcion += '<li>marca: ' + producto.marca + '</li>';
+                    descripcion += '<li>detalles: ' + producto.detalles + '</li>';
+
+                    template += `
+                        <tr productId="${producto.id}">
+                            <td>${producto.id}</td>
+                            <td>
+                                <a href="#" class="product-item">${producto.nombre}</a>
+                            </td>
+                            <td><ul>${descripcion}</ul></td>
+                            <td>
+                                <button class="product-delete btn btn-danger">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+
+                    template_bar += `
+                        <li>${producto.nombre}</li>
+                    `;
+                });
+
+                // SE HACE VISIBLE LA BARRA DE ESTADO
+                $('#product-result').removeClass('d-none').addClass('card my-4 d-block');
+
+                // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
+                $('#container').html(template_bar);
+
+                // SE INSERTA LA PLANTILLA EN EL ELEMENTO CON ID "productos"
+                $('#products').html(template);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error en la solicitud AJAX:', error);
+        }
+    });
+}
+
+// FUNCIÓN DE VALIDACIÓN
+function validarFormulario(finalJSON) {
+    if (!finalJSON.nombre || finalJSON.nombre.length > 100) {
+        alert('El nombre es requerido y debe tener una longitud máxima de 100 caracteres.');
+        return false;
+    }
+
+    if (!finalJSON.marca || finalJSON.marca.trim() === '') {
+        alert('La marca es requerida.');
+        return false;
+    }
+
+    if (!finalJSON.modelo || finalJSON.modelo.length > 25 || !/^[a-zA-Z0-9]+$/.test(finalJSON.modelo)) {
+        alert('El modelo es requerido, debe tener una longitud máxima de 25 caracteres y debe ser alfanumérico.');
+        return false;
+    }
+
+    if (isNaN(finalJSON.precio) || finalJSON.precio < 99.99) {
+        alert('El precio es requerido y debe ser mayor a 99.99.');
+        return false;
+    }
+
+    if (finalJSON.detalles && finalJSON.detalles.length > 250) {
+        alert('Los detalles no deben exceder los 250 caracteres.');
+        return false;
+    }
+
+    if (isNaN(finalJSON.unidades) || finalJSON.unidades < 0) {
+        alert('El número de unidades es requerido y debe ser mayor o igual a 0.');
+        return false;
+    }
+
+    if (!finalJSON.imagen || finalJSON.imagen.trim() === '') {
+        finalJSON.imagen = 'img/default.png';
+    }
+
+    return true;
+}
+
+// FUNCIÓN CALLBACK DE BOTÓN "Agregar Producto"
+function agregarProducto(e) {
+    e.preventDefault();
+
+    var productoJsonString = $('#description').val();
+    var finalJSON = JSON.parse(productoJsonString);
+    finalJSON['id'] = $('#id').val(); 
+    finalJSON['nombre'] = $('#name').val();
+
+    finalJSON['id'] = parseInt($('#id').val(), 10);  // Convertir el id a número
+
+    if (!validarFormulario(finalJSON)) {
+        return;
+    }
+    console.log(finalJSON); 
+
+    productoJsonString = JSON.stringify(finalJSON, null, 2);
+    console.log(editUrl);
+    $.ajax({
+        url: editUrl,
+        type: 'POST',
+        contentType: 'application/json;charset=UTF-8',
+        data: productoJsonString,
+        dataType: 'json',
+        success: function(respuesta) {
+            console.log(respuesta);
+            let template_bar = '';
+            template_bar += `
+            <li style="list-style: none;">status: ${respuesta.status}</li>
+            <li style="list-style: none;">message: ${respuesta.message}</li>
+        `;
+
+        // SE HACE VISIBLE LA BARRA DE ESTADO
+        $('#product-result').removeClass('d-none').addClass('card my-4 d-block');
+
+        // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
+        $('#container').html(template_bar);
+
+        // SE LISTAN TODOS LOS PRODUCTOS
+        listarProductos();
+        },
+        error: function(xhr, status, error) {
+            console.error('Error en la solicitud AJAX:', error);
+        }
+    });
+}
+
+// FUNCIÓN CALLBACK DE BOTÓN "Eliminar"
+function eliminarProducto() {
+    if (confirm("¿De verdad deseas eliminar el producto?")) {
+        var id = $(this).closest('tr').attr('productId');
+
+        $.ajax({
+            url: './backend/product-delete.php',
+            type: 'GET',
+            data: { id: id },
+            dataType: 'json',
+            success: function(respuesta) {
+                console.log(respuesta);
+                let template_bar = '';
+                template_bar += `
+                    <li style="list-style: none;">status: ${respuesta.status}</li>
+                    <li style="list-style: none;">message: ${respuesta.message}</li>
+                `;
+
+                // SE HACE VISIBLE LA BARRA DE ESTADO
+                $('#product-result').removeClass('d-none').addClass('card my-4 d-block');
+
+                // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
+                $('#container').html(template_bar);
+
+                // SE LISTAN TODOS LOS PRODUCTOS
+                listarProductos();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error en la solicitud AJAX:', error);
+            }
+        });
+    }
+}
+
+// Delegación de eventos para los botones de eliminar
+$(document).on('click', '.product-delete', eliminarProducto);
+
+$(document).on('click', '.product-item', function() {
+    let element = $(this)[0].parentElement.parentElement;
+    let id = $(element).attr('productId');
+
+    // Obtener el producto del servidor
+    $.post('./backend/product-single.php', { id }, function(response) {
+        const product = JSON.parse(response);
+        $('#id').val(product.id); 
+        $('#name').val(product.name);
+
+        let formattedProduct = {
+            "precio": parseFloat(product.precio),
+            "unidades": parseInt(product.unidades),
+            "modelo": product.modelo,
+            "marca": product.marca,
+            "detalles": product.detalles,
+            "imagen": product.imagen
+        };
+        let formattedJson = JSON.stringify(formattedProduct, null, 2);
+        $('#description').val(formattedJson);
+        console.log(formattedJson);
+        editUrl = './backend/product-edit.php'; // Change URL to edit product
+    });
+});
+
+// Inicialización al cargar la página
+$(document).ready(function() {
+    $('#product-form').submit(agregarProducto); 
+    init();
+});

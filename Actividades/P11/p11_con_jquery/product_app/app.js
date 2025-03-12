@@ -133,7 +133,7 @@ $(document).ready(function() {
                 }
                 break;
             case 'precio':
-                if (isNaN(valor) || valor < 99.99) {
+                if (!valor || isNaN(valor) || valor < 99.99) {
                     mensaje = 'El precio es requerido y debe ser mayor a 99.99.';
                 }
                 break;
@@ -143,7 +143,7 @@ $(document).ready(function() {
                 }
                 break;
             case 'unidades':
-                if (isNaN(valor) || valor < 0) {
+                if (! valor || isNaN(valor) || valor < 0) {
                     mensaje = 'El número de unidades es requerido y debe ser mayor o igual a 0.';
                 }
                 break;
@@ -288,7 +288,7 @@ $(document).ready(function() {
             cont++;
         }
     
-        if (isNaN(postData.precio) || postData.precio < 99.99) {
+        if (!postData.precio || isNaN(postData.precio) || postData.precio < 99.99) {
             data.message += '<li>El precio es requerido y debe ser mayor a 99.99.</li>';
             cont++;
         }
@@ -298,7 +298,7 @@ $(document).ready(function() {
             cont++;
         }
     
-        if (isNaN(postData.unidades) || postData.unidades < 0) {
+        if (!postData.unidades || isNaN(postData.unidades) || postData.unidades < 0) {
             data.message += '<li>El número de unidades es requerido y debe ser mayor o igual a 0.</li>';
             cont++;
         }
