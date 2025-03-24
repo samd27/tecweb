@@ -60,7 +60,7 @@ class Pie{
     }
 
     public function graficar(){
-        echo '<hr>';
+        
         $estilo = 'font-size: 15px; text-align: center';
         echo '<div style="'.$estilo.'">';
         echo '<h4>'.$this->mensaje.'</h4>';
