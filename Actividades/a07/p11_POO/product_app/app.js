@@ -8,8 +8,9 @@ $(document).ready(function() {
         $.ajax({
             url: './backend/product-list.php',
             type: 'GET',
+            dataTypr: 'json',
             success: function(response) {
-                const productos = JSON.parse(response);
+                const productos = response;
                 if(Object.keys(productos).length > 0) {
                     let template = '';
                     productos.forEach(producto => {
