@@ -10,7 +10,7 @@ $(document).ready(function() {
             type: 'GET',
             dataTypr: 'json',
             success: function(response) {
-                const productos = response;
+                const productos = JSON.parse(response);
                 if(Object.keys(productos).length > 0) {
                     let template = '';
                     productos.forEach(producto => {
