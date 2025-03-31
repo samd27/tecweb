@@ -45,7 +45,7 @@ $(document).ready(function() {
     
         if (search) {
             $.ajax({
-                url: `../Controller/ProductController.php?action=search&query=${search}`, // URL corregida
+                url: `../Controller/ProductController.php?action=search&query=${search}`,
                 type: 'GET',
                 success: function (response) {
                     if (!response.error) {
