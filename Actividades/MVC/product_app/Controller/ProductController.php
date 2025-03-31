@@ -11,7 +11,7 @@ class ProductController{
         $this->productObj = new Products('root','samd2704','marketzone');
     }
 
-    public function handleRequest() {
+    public function productCase() {
         $action = $_GET['action'] ?? $_POST['action'] ?? null;
 
         switch ($action) {
@@ -41,44 +41,43 @@ class ProductController{
         }
     }
 
-    private function list() {
+    public function list() {
         $this->productObj->list();
         echo $this->productObj->getData();
     }
 
-    private function add($data) {
+    public function add($data) {
         $this->productObj->add($data);
         echo $this->productObj->getData();
     }
 
-    private function edit($data) {
+    public function edit($data) {
         $this->productObj->edit($data);
         echo $this->productObj->getData();
     }
 
-    private function delete($id) {
+    public function delete($id) {
         $this->productObj->delete(['id' => $id]);
         echo $this->productObj->getData();
     }
 
-    private function search($query) {
+    public function search($query) {
         $this->productObj->search($query);
         echo $this->productObj->getData();
     }
 
-    private function single($id) {
+    public function single($id) {
         $this->productObj->single($id);
         echo $this->productObj->getData();
     }
 
-   
-    private function checkName($name) {
+    public function checkName($name) {
         $this->productObj->checkName($name);
         echo $this->productObj->getData();
     }
 }
 
 $controller = new ProductController();
-$controller->handleRequest();
+$controller->productCase();
 
 ?>
