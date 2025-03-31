@@ -162,23 +162,23 @@ class Products extends DataBase{
         $this->conexion->close();
     }
 
-    public function checkName($nombre){
-        $this->data = array(
-            'status'  => 'error',
-            'message' => 'Ya existe un producto con ese nombre'
-        );
+   
+    public function checkName($nombre) {
+        $response = array('exists' => false);
 
-        if(isset($nombre)) {
-            $sql = "SELECT * FROM productos WHERE nombre = '$nombre' AND eliminado = 0";
-            $result = $this->conexion->query($sql);
-            
-            if ($result->num_rows == 0) {
-                $this->data['status'] =  "success";
-                $this->data['message'] =  "Nombre disponible";
+        if (isset($nombre)) {
+            $sql = "SELECT * FROM productos WHERE nombre = '{$nombre}' AND eliminado = 0";
+            if ($result = $this->conexion->query($sql)) {
+                if ($result->num_rows > 0) {
+                    $response['exists'] = true;
+                }
+                $result->free();
+            } else {
+                die('Query Error: ' . mysqli_error($this->conexion));
             }
-            $result->free();
-            $this->conexion->close();
         }
+
+        $this->data = $response;
     }
 
 

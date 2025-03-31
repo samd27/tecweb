@@ -34,7 +34,7 @@ class ProductController{
                 $this->single($_POST['id']);
                 break;
             case 'checkName':
-                $this->productObj->checkName($_POST['nombre']);
+                $this->checkName($_POST['nombre']);
                 break;
             default:
                 echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
@@ -71,6 +71,7 @@ class ProductController{
         echo $this->productObj->getData();
     }
 
+   
     private function checkName($name) {
         $this->productObj->checkName($name);
         echo $this->productObj->getData();
