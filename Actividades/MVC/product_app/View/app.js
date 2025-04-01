@@ -210,15 +210,19 @@ $(document).ready(function() {
             detalles: $('#form-detalles').val(),
             unidades: parseInt($('#form-unidades').val()),
             imagen: $('#form-imagen').val(),
-            action: edit ? 'edit' : 'add'
         };
+
+        const url = edit 
+        ? '../Controller/ProductController.php?action=edit' 
+        : '../Controller/ProductController.php?action=add';
+
         console.log(postData);
         if (!validarFormulario(postData)) {
             return;
         }
         
 
-        $.post('../Controller/ProductController.php', postData, (response) => {
+        $.post(url, postData, (response) => {
             let respuesta = JSON.parse(response);
 
             let template_bar = '';
