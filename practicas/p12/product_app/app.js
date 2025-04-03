@@ -97,8 +97,9 @@ $(document).ready(function() {
     $('#form-nombre').on('keyup', function() {
         const nombre = $(this).val();
         if (nombre) {
+            const cn = edit ? './backend/Update/Update.php?action=checkName' : './backend/Create/Create.php?action=checkName';
             $.ajax({
-                url: './backend/Update/Update.php?action=checkName',
+                url: cn,
                 type: 'POST',
                 data: { nombre },
                 success: function(response) {
@@ -220,7 +221,7 @@ $(document).ready(function() {
         if (!validarFormulario(postData)) {
             return;
         }
-        const url = edit ? './backend/Update/Update.php?action=edit' : './backend/product-add.php';
+        const url = edit ? './backend/Update/Update.php?action=edit' : './backend/Create/Create.php?action=add';
 
         $.post(url, postData, (response) => {
             let respuesta = JSON.parse(response);
