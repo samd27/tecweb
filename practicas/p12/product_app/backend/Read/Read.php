@@ -1,5 +1,5 @@
 <?php
-namespace TECWEB\MYAPI;
+namespace TECWEB\READ;
 
 require_once __DIR__ . '/../myapi/DataBase.php';
 use TECWEB\MYAPI\DataBase as DataBase;

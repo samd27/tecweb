@@ -98,7 +98,7 @@ $(document).ready(function() {
         const nombre = $(this).val();
         if (nombre) {
             $.ajax({
-                url: './backend/product-checkName.php',
+                url: './backend/Update/Update.php?action=checkName',
                 type: 'POST',
                 data: { nombre },
                 success: function(response) {
@@ -116,7 +116,7 @@ $(document).ready(function() {
                 }
             });
         }
-    });
+    })
 
     function validarCampo(campo, valor) {
         let mensaje = '';
@@ -220,7 +220,7 @@ $(document).ready(function() {
         if (!validarFormulario(postData)) {
             return;
         }
-        const url = edit ? './backend/product-edit.php' : './backend/product-add.php';
+        const url = edit ? './backend/Update/Update.php?action=edit' : './backend/product-add.php';
 
         $.post(url, postData, (response) => {
             let respuesta = JSON.parse(response);
