@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     function listarProductos() {
         $.ajax({
-            url: './backend/product-list.php',
+            url: './backend/Read/Read.php?action=list',
             type: 'GET',
             dataTypr: 'json',
             success: function(response) {
@@ -44,9 +44,12 @@ $(document).ready(function() {
         if($('#search').val()) {
             let search = $('#search').val();
             $.ajax({
-                url: './backend/product-search.php?search='+$('#search').val(),
-                data: {search},
+                url: './backend/Read/Read.php',
                 type: 'GET',
+                data: {
+                    action: 'search',
+                    search: search
+                },
                 success: function (response) {
                     if(!response.error) {
                         const productos = JSON.parse(response);
@@ -251,7 +254,7 @@ $(document).ready(function() {
     $(document).on('click', '.product-item', (e) => {
         const element = $(e.target).closest('tr');
         const id = $(element).attr('productId');
-        $.post('./backend/product-single.php', {id}, (response) => {
+        $.post('./backend/Read/Read.php?action=single', {id}, (response) => {
             let product = JSON.parse(response);
             $('#form-nombre').val(product.nombre);
             $('#form-marca').val(product.marca);
