@@ -1,8 +1,8 @@
 <?php
-namespace TECWEB\CREATE;
+namespace Backend\Create;
 
 require_once __DIR__ . '/../myapi/DataBase.php';
-use TECWEB\MYAPI\DataBase as DataBase;
+use Backend\myapi\DataBase as DataBase;
 
 class Create extends DataBase {
     public function __construct($db) {
