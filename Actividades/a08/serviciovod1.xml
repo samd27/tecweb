@@ -1,0 +1,97 @@
+<catalogo>
+    <cuenta>
+        <correo>emailuser12@hotmail.com</correo>
+        <perfiles>
+            <perfil>
+                <usuario>User 1</usuario>
+                <idioma>Español</idioma>
+            </perfil>
+            <perfil>
+                <usuario>User 2</usuario>
+                <idioma>Inglés</idioma>
+            </perfil>
+        </perfiles>
+    </cuenta>
+    <contenido>
+        <peliculas>
+            <genero>
+                <nombre>Comedia</nombre>
+                <titulo>
+                    <nombre>Comedia 1</nombre>
+                    <duracion>120 min</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Comedia 2</nombre>
+                    <duracion>90 min</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Comedia 3</nombre>
+                    <duracion>100 min</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Comedia 4</nombre>
+                    <duracion>110 min</duracion>
+                </titulo>
+            </genero>
+            <genero>
+                <nombre>Drama</nombre>
+                <titulo>
+                    <nombre>Drama 1</nombre>
+                    <duracion>70 min</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Drama 2</nombre>
+                    <duracion>80 min</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Drama 3</nombre>
+                    <duracion>90 min</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Drama 4</nombre>
+                    <duracion>100 min</duracion>
+                </titulo>
+            </genero>
+        </peliculas>
+        <programas>
+            <genero>
+                <nombre>Acción</nombre>
+                <titulo>
+                    <nombre>Acción 1</nombre>
+                    <duracion>30 min</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Acción 2</nombre>
+                    <duracion>40 min</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Acción 3</nombre>
+                    <duracion>50 min</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Acción 4</nombre>
+                    <duracion>60 min</duracion>
+                </titulo>
+            </genero>
+            <genero>
+                <nombre>Documental</nombre>
+                <titulo>
+                    <nombre>Documental 1</nombre>
+                    <duracion>70 min</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Documental 2</nombre>
+                    <duracion>80 min</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Documental 3</nombre>
+                    <duracion>90 min</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Documental 4</nombre>
+                    <duracion>100 min</duracion>
+                </titulo>
+            </genero>
+        </programas>
+    </contenido>
+</catalogo>

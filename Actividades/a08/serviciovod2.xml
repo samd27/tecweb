@@ -1,0 +1,38 @@
+<catalogo>
+    <cuenta correo="emailuser12@hotmail.com">
+        <perfiles>
+            <perfil usuario="User 1" idioma="Español" />
+            <perfil usuario="User 2" idioma="Inglés" />
+        </perfiles>
+    </cuenta>
+    <contenido>
+        <peliculas>
+            <genero nombre="Comedia">
+                <titulo nombre="Comedia 1" duracion="120 min" />
+                <titulo nombre="Comedia 2" duracion="90 min" />
+                <titulo nombre="Comedia 3" duracion="100 min" />
+                <titulo nombre="Comedia 4" duracion="110 min" />
+            </genero>
+            <genero nombre="Drama">
+                <titulo nombre="Drama 1" duracion="70 min" />
+                <titulo nombre="Drama 2" duracion="80 min" />
+                <titulo nombre="Drama 3" duracion="90 min" />
+                <titulo nombre="Drama 4" duracion="100 min" />
+            </genero>
+        </peliculas>
+        <programas>
+            <genero nombre="Acción">
+                <titulo nombre="Acción 1" duracion="30 min" />
+                <titulo nombre="Acción 2" duracion="40 min" />
+                <titulo nombre="Acción 3" duracion="50 min" />
+                <titulo nombre="Acción 4" duracion="60 min" />
+            </genero>
+            <genero nombre="Documental">
+                <titulo nombre="Documental 1" duracion="70 min" />
+                <titulo nombre="Documental 2" duracion="80 min" />
+                <titulo nombre="Documental 3" duracion="90 min" />
+                <titulo nombre="Documental 4" duracion="100 min" />
+            </genero>
+        </programas>
+    </contenido>
+</catalogo>
